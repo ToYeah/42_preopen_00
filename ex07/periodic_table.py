@@ -6,15 +6,13 @@ def split_elem_line(line):
     for i in elem_list:
         splitted_elem = i.split(':')
         res[splitted_elem[0]] = splitted_elem[1]
-        # TODO　文字列が不正な時
     return res
-
 
 def create_elem_cell(elem):
     res = ""
     res += f"<td style=\"{style}\">" + '\n'
     res += f"<h4>{elem['name']}</h4>" + '\n'
-    res += f"<ul>" + '\n'
+    res += f"<ul padding-left: 0;>" + '\n'
     res += f"<li>No.{elem['number']}</li>" + '\n'
     res += f"<li>{elem['small']}</li>" + '\n'
     res += f"<li>{elem['molar']}</li>" + '\n'
@@ -28,7 +26,7 @@ def create_none_cell():
     res = "<td></td>\n"
     return res
 
-style="border: 1px solid black;"
+style="border: 1px solid black; min-width: 150px"
 
 try:
     file = open('./periodic_table.txt', 'r', encoding='UTF-8')
@@ -50,8 +48,8 @@ try:
                 res += create_none_cell()
         res += "</tr>"
     res += "</table>"
-    print(res)
-
+    res_file = open('./periodic_table.html','w')
+    res_file.write(res)
 
 except Exception as e:
     print(e)
